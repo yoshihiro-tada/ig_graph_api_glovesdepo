@@ -4,14 +4,9 @@ import Image from "next/image";
 export default function Instagram() {
   const [images, setImages] = useState([]);
 
-  type InstagramImage = {
-    media_url: string;
-    caption?: string;
-  };
-  
   useEffect(() => {
     fetch(
-      `https://graph.facebook.com/v15.0/${process.env.NEXT_PUBLIC_INSTAGRAM_ID}?access_token=${process.env.NEXT_PUBLIC_INSTAGRAM_ACCESS_TOKEN}&fields=media{like_count,media_url}`
+      `https://graph.facebook.com/v20.0/${process.env.INSTAGRAM_ID}?access_token=${process.env.INSTAGRAM_ACCESS_TOKEN}&fields=media{like_count,media_url}`
     )
       .then((response) => {
         if (!response.ok) {
@@ -30,8 +25,12 @@ export default function Instagram() {
 
   return (
     <>
-      {images.map((image, index) => (
-        <Image key={index} src={image.media_url} alt={image.caption} />
+      {images?.map((image, index) => (
+        <Image
+          key={index}
+          src={image['media_url']}
+          alt={image['caption']}
+        />
       ))}
     </>
   );
