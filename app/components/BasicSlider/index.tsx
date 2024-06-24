@@ -6,7 +6,7 @@ export default function Instagram() {
 
   useEffect(() => {
     fetch(
-      `https://graph.facebook.com/v20.0/${process.env.INSTAGRAM_ID}?access_token=${process.env.INSTAGRAM_ACCESS_TOKEN}&fields=media{like_count,media_url}`
+      `https://graph.facebook.com/v20.0/${process.env.NEXT_PUBLIC_INSTAGRAM_ID}?access_token=${process.env.NEXT_PUBLIC_INSTAGRAM_ACCESS_TOKEN}&fields=media{like_count,media_url}`
     )
       .then((response) => {
         if (!response.ok) {
@@ -14,7 +14,14 @@ export default function Instagram() {
         }
         return response.json();
       })
-      .then((data) => setImages(data.data))
+      .then((data) => {
+        console.log("Fetched data:");
+        console.log(data);
+        console.log("Fetched images");
+        console.log(data.media.data);
+        setImages(data.media.data);
+        console.log(images);
+      })
       .catch((error) =>
         console.error(
           "An error occurred while fetching Instagram images:",
@@ -23,13 +30,25 @@ export default function Instagram() {
       );
   }, []);
 
+  useEffect(() => {
+    console.log("imagesステートが更新されました:");
+    console.log(images);
+  }, [images]);
+
+  interface ImageData {
+    id: number;
+    media_url: string;
+  }
+
   return (
     <>
-      {images?.map((image, index) => (
+      <p>aaaa</p>
+      {images?.map((image) => (
         <Image
-          key={index}
-          src={image['media_url']}
-          alt={image['caption']}
+          src={image.media_url}
+          alt="インスタグラムの投稿画像"
+          width="500"
+          height="500"
         />
       ))}
     </>
