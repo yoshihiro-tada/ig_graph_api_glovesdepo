@@ -15,12 +15,7 @@ export default function Instagram() {
         return response.json();
       })
       .then((data) => {
-        console.log("Fetched data:");
-        console.log(data);
-        console.log("Fetched images");
-        console.log(data.media.data);
         setImages(data.media.data);
-        console.log(images);
       })
       .catch((error) =>
         console.error(
@@ -30,22 +25,12 @@ export default function Instagram() {
       );
   }, []);
 
-  useEffect(() => {
-    console.log("imagesステートが更新されました:");
-    console.log(images);
-  }, [images]);
-
-  interface ImageData {
-    id: number;
-    media_url: string;
-  }
-
   return (
     <>
       <p>aaaa</p>
       {images?.map((image) => (
         <Image
-          src={image.media_url}
+          src={image['media_url']}
           alt="インスタグラムの投稿画像"
           width="500"
           height="500"
