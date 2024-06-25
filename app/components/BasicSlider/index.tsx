@@ -10,6 +10,17 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import styles from "./index.module.css";
 
+const slideSettings = {
+  0: {
+    slidesPerView: .98,
+  },
+  /*
+  1024: {
+    slidesPerView: 3,
+  },
+  */
+};
+
 export default function Instagram() {
   const [images, setImages] = useState([]);
 
@@ -38,25 +49,25 @@ export default function Instagram() {
   return (
     <>
       <Swiper
-      modules={[Navigation, Pagination, Autoplay]}
-      /*
-      breakpoints={slideSettings} // slidesPerViewを指定
-      */
-      slidesPerView={"auto"} // ハイドレーションエラー対策
-      centeredSlides={true} // スライドを中央に配置
-      loop={true} // スライドをループさせる
-      speed={1000} // スライドが切り替わる時の速度
-      autoplay={{
-        delay: 2500,
-        disableOnInteraction: false,
-      }} // スライド表示時間
-      navigation // ナビゲーション（左右の矢印）
-      pagination={{
-        clickable: true,
-      }} // ページネーション, クリックで対象のスライドに切り替わる
-      className={styles.slideWrapper}
+        modules={[Navigation, Pagination, Autoplay]}
+        breakpoints={slideSettings} // slidesPerViewを指定
+        slidesPerView={"auto"} // ハイドレーションエラー対策
+        centeredSlides={true} // スライドを中央に配置
+        loop={true} // スライドをループさせる
+        speed={1000} // スライドが切り替わる時の速度
+        autoplay={{
+          delay: 2500,
+          disableOnInteraction: false,
+        }} // スライド表示時間
+        navigation // ナビゲーション（左右の矢印）
+        pagination={{
+          clickable: true,
+        }} // ページネーション, クリックで対象のスライドに切り替わる
+        className={styles.slideWrapper}
       >
-        <SwiperSlide>
+        <SwiperSlide
+          className={styles['swiper-slide']}
+        >
         {images?.slice(0, 9).map((image) => (
             <Link href={image['permalink']} target="_top">
               <Image
@@ -67,8 +78,8 @@ export default function Instagram() {
                     : image['media_url']
                 }
                 alt="インスタグラムの投稿画像"
-                width="300"
-                height="300"
+                width="341"
+                height="341"
               />
             </Link>
           ))}

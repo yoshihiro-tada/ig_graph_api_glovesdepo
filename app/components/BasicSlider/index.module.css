@@ -1,14 +1,7 @@
-.slideWrapper {
-  max-width: 100%;
+.slide-wrapper{
+  max-width: 1024px;
 }
 
-.slideImage {
-  aspect-ratio: 1/1;
+.swiper-slide img{
   object-fit: cover;
-}
-
-@media screen and (min-width: 768px) {
-  .slideImage {
-    aspect-ratio: initial;
-  }
 }
