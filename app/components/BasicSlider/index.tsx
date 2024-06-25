@@ -12,7 +12,7 @@ import styles from "./index.module.css";
 
 const slideSettings = {
   0: {
-    slidesPerView: .98,
+    slidesPerView: .97,
   },
   /*
   1024: {
