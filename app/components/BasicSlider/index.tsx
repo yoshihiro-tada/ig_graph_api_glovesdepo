@@ -2,6 +2,14 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
+/* swiper.js */
+import { Autoplay, Navigation, Pagination } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import styles from "./index.module.css";
+
 export default function Instagram() {
   const [images, setImages] = useState([]);
 
@@ -16,7 +24,7 @@ export default function Instagram() {
         return response.json();
       })
       .then((data) => {
-        console.log(data.media.data.media_url);
+        console.log(data.media.data);
         setImages(data.media.data);
       })
       .catch((error) =>
@@ -29,17 +37,43 @@ export default function Instagram() {
 
   return (
     <>
-      {images?.map((image) => (
-        <Link href={image['permalink']} target="_top">
-          <Image
-            key={image['id']}
-            src={image['media_url']}
-            alt="インスタグラムの投稿画像"
-            width="300"
-            height="300"
-          />
-        </Link>
-      ))}
+      <Swiper
+      modules={[Navigation, Pagination, Autoplay]}
+      /*
+      breakpoints={slideSettings} // slidesPerViewを指定
+      */
+      slidesPerView={"auto"} // ハイドレーションエラー対策
+      centeredSlides={true} // スライドを中央に配置
+      loop={true} // スライドをループさせる
+      speed={1000} // スライドが切り替わる時の速度
+      autoplay={{
+        delay: 2500,
+        disableOnInteraction: false,
+      }} // スライド表示時間
+      navigation // ナビゲーション（左右の矢印）
+      pagination={{
+        clickable: true,
+      }} // ページネーション, クリックで対象のスライドに切り替わる
+      className={styles.slideWrapper}
+      >
+        <SwiperSlide>
+        {images?.slice(0, 9).map((image) => (
+            <Link href={image['permalink']} target="_top">
+              <Image
+                key={image['id']}
+                src={
+                  image['media_type'] === 'VIDEO'
+                    ? image['thumbnail_url']
+                    : image['media_url']
+                }
+                alt="インスタグラムの投稿画像"
+                width="300"
+                height="300"
+              />
+            </Link>
+          ))}
+        </SwiperSlide>
+      </Swiper>
     </>
   );
 }
