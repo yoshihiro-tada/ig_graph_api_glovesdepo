@@ -1,7 +1,9 @@
 .slide-wrapper{
   max-width: 1024px;
 }
-
+.slide-wrapper{
+  justify-content: center;
+}
 .swiper-slide img{
   object-fit: cover;
 }
