@@ -12,13 +12,11 @@ import styles from "./index.module.css";
 
 const slideSettings = {
   0: {
-    slidesPerView: 1,
+    slidesPerView: 1.4,
   },
-  /*
   1024: {
     slidesPerView: 3,
   },
-  */
 };
 
 export default function Instagram() {
@@ -51,7 +49,9 @@ export default function Instagram() {
       <Swiper
         modules={[Navigation, Pagination, Autoplay]}
         breakpoints={slideSettings} // slidesPerViewを指定
+        /*
         slidesPerView={"auto"} // ハイドレーションエラー対策
+        */
         centeredSlides={true} // スライドを中央に配置
         loop={true} // スライドをループさせる
         speed={1000} // スライドが切り替わる時の速度
@@ -65,10 +65,11 @@ export default function Instagram() {
         }} // ページネーション, クリックで対象のスライドに切り替わる
         className={styles.slideWrapper}
       >
-        <SwiperSlide
-          className={styles['swiper-slide']}
-        >
         {images?.slice(0, 9).map((image) => (
+          <SwiperSlide
+            className={styles['swiper-slide']}
+            key={image['id']}
+          >
             <Link href={image['permalink']} target="_top">
               <Image
                 key={image['id']}
@@ -82,8 +83,8 @@ export default function Instagram() {
                 height="341"
               />
             </Link>
-          ))}
-        </SwiperSlide>
+          </SwiperSlide>
+        ))}
       </Swiper>
     </>
   );

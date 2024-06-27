@@ -1,3 +1,6 @@
+.swiper{
+  max-width: 1024px !important;
+}
 .slide-wrapper{
   max-width: 1024px;
 }
