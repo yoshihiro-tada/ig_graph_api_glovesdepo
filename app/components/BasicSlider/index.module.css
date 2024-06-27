@@ -7,6 +7,9 @@
 .slide-wrapper{
   justify-content: center;
 }
+.swiper-slide{
+  max-width: 341px;
+}
 .swiper-slide img{
   object-fit: cover;
 }
