@@ -10,4 +10,6 @@ body{
   color: white;
   padding: 1rem;
   border-radius: 30%;
+  font-size: unset !important;
+  font-weight:bold;
 }
