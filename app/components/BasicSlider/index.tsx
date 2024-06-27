@@ -62,9 +62,6 @@ export default function Instagram() {
           disableOnInteraction: false,
         }} // スライド表示時間
         navigation // ナビゲーション（左右の矢印）
-        pagination={{
-          clickable: true,
-        }} // ページネーション, クリックで対象のスライドに切り替わる
         className={styles.slideWrapper}
       >
         {images?.slice(0, 9).map((image) => (
