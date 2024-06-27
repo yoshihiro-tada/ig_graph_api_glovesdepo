@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -10,16 +10,9 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import styles from "./index.module.css";
 
-/*
-const slideSettings = {
-  0: {
-    slidesPerView: 1.4,
-  },
-  1024: {
-    slidesPerView: 3,
-  },
-};
-*/
+/* fontawsome */
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHome } from '@fortawesome/free-solid-svg-icons';
 
 export default function Instagram() {
   const [images, setImages] = useState([]);
@@ -35,7 +28,6 @@ export default function Instagram() {
         return response.json();
       })
       .then((data) => {
-        console.log(data.media.data);
         setImages(data.media.data);
       })
       .catch((error) =>
@@ -50,9 +42,6 @@ export default function Instagram() {
     <>
       <Swiper
         modules={[Navigation, Pagination, Autoplay]}
-        /*
-        breakpoints={slideSettings} // slidesPerViewを指定
-        */
         slidesPerView={"auto"} // ハイドレーションエラー対策
         centeredSlides={true} // スライドを中央に配置
         loop={true} // スライドをループさせる
