@@ -5,6 +5,7 @@ body{
   margin: 0;
 }
 
+/* swiper.js */
 .swiper-button-prev:after, .swiper-button-next:after {
   background: #333;
   color: white;
